@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="2062b7f7-529c-4d32-a4b6-204d618fe262" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="basic-prc-api-jenkinsFlow" doc:id="1d981a6e-d777-4072-8b60-2a4f07550451" >
+		<http:listener doc:name="Listener" doc:id="136321e6-acce-4ecb-a8a2-0d918ce743f4" config-ref="HTTP_Listener_config" path="/jenkins"/>
+		<set-payload value='#[{&#10;  "name": "ram",&#10;  "college": "vjit",&#10;  "company": "ETG",&#10;  "RNo": 4,&#10;  "code": 700&#10;}]' doc:name="Set Payload" doc:id="520fc985-0292-4884-8cb6-02c7bbbaa58d" />
+		<ee:transform doc:name="Transform Message" doc:id="72678e96-5e26-4a34-9f4b-3e25f14b536b" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
