@@ -41,7 +41,6 @@
 						<businessGroup>${business}</businessGroup>
 						<vCores>${vCore}</vCores>
 						<replicas>${workers}</replicas>
-						<objectStoreV2>true</objectStoreV2>
 					</cloudhub2Deployment>
 					<classifier>mule-application</classifier>
 				</configuration>
